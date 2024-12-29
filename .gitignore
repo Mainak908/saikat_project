@@ -3,3 +3,4 @@
 */pnpm-lock.yaml
 */.env
 temp.txt
+*/package-lock.json
