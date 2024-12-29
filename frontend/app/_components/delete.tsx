@@ -3,7 +3,6 @@
 import { fetcher } from "@/app/_helpers/helperFunc";
 import { Button } from "@/components/ui/button";
 import { Loader2, Trash } from "lucide-react";
-import { useRouter } from "next/navigation"; // For dynamic refresh
 import { useState } from "react";
 
 interface DeleteButtonProps {
@@ -13,7 +12,7 @@ interface DeleteButtonProps {
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ id, fn }) => {
   const [loading, setLoading] = useState(false); // State for loading spinner
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleDelete = async () => {
     setLoading(true);
