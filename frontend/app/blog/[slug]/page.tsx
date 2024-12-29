@@ -1,20 +1,29 @@
 import Navbar from "@/app/_components/navbar";
 import RecentNews from "@/app/_components/Recentnews";
+import StockNavbar from "@/app/_components/stockbar";
 import { articles } from "@/data";
+import { Metadata } from "next";
 import Image from "next/image";
 
-export default async function Page({
-  params,
-}: {
+type Props = {
   params: Promise<{ slug: string }>;
-}) {
+};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = (await params).slug;
+
+  return {
+    title: slug,
+  };
+}
+export default async function Page({ params }: Props) {
   const slug = (await params).slug;
   const news = articles.find((value) => value.slug === slug);
   if (!news) return;
   return (
     <>
       <Navbar />
-      <div className="max-w-[90%] lg:max-w-[80%] mx-auto px-4 lg:pt-24 pt-[70px]">
+      <StockNavbar />
+      <div className="max-w-[90%] lg:max-w-[80%] mx-auto px-4 lg:pt-24 pt-[90px] mb-6">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main News Section */}
           <div className="lg:col-span-3 lg:border-r lg:border-gray-300">

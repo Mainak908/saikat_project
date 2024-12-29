@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const LatestRead = () => {
   return (
-    <div className="bg-gray-100 lg:pt-24 pt-[60px]">
+    <div className="bg-gray-100 lg:pt-24 pt-[90px]">
       <div className="w-[90%] lg:w-[66%] mx-auto lg:px-4 px-1">
         <div className="lg:flex gap-3">
           <div>
@@ -14,8 +14,11 @@ const LatestRead = () => {
             </h1>
             <div className="lg:border-b-4 border-b-2 border-black lg:w-[650px] w-[95%]"></div>
           </div>
-
-          <Button className="py-5 px-7 mt-2">Browse All Latest</Button>
+          <Button className="py-5 px-7 mt-2">
+            <Link href={"/trending"} className="">
+              Browse All Latest
+            </Link>
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-2 mt-6">

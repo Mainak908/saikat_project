@@ -18,11 +18,25 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@radix-ui/react-hover-card";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { IoIosSearch } from "react-icons/io";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { RxCross1 } from "react-icons/rx";
 import MediaRendering from "../_helpers/media-render";
 
 const Navbar = () => {
+  // const [data, setdata] = useState("");
+  const [clicked, setclicked] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (clicked && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [clicked]);
+
   return (
     <>
       <MediaRendering minWidth={null} maxWidth="600">
@@ -94,12 +108,10 @@ const Navbar = () => {
         <nav className="bg-[#7cc68d] py-3 fixed w-screen z-50">
           <div className="container mx-auto flex justify-between items-center px-4">
             <div className="flex items-center justify-center gap-2">
-              {/* Icon */}
               <div className="bg-green-600 text-white w-10 h-10 flex items-center justify-center rounded-lg shadow-md">
                 <span className="text-2xl font-bold">N</span>
               </div>
 
-              {/* Text */}
               <div>
                 <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight">
                   <span className="text-green-600">nivesh</span>
@@ -110,40 +122,82 @@ const Navbar = () => {
                 </p>
               </div>
             </div>
+            {!clicked && (
+              <ul className="flex items-center space-x-6 text-md font-bold text-white">
+                {/* Trending News */}
+                <li className="cursor-pointer hover:text-green-200 transition-all duration-300">
+                  Trending News
+                </li>
 
-            <ul className="flex space-x-6 text-md font-bold text-white">
-              <li className="cursor-pointer hover:text-green-200 transition">
-                Trending News
-              </li>
+                {/* Learning Dropdown */}
+                <HoverCard>
+                  <HoverCardTrigger>
+                    <div className="relative flex items-center gap-1 cursor-pointer">
+                      <li className="hover:text-green-200 transition-all duration-300 flex items-center gap-1">
+                        Learning
+                        <MdOutlineKeyboardArrowDown className="text-lg" />
+                      </li>
+                    </div>
+                  </HoverCardTrigger>
+                  <HoverCardContent className="absolute top-full right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-md w-40">
+                    <ul>
+                      <Link
+                        href={"/learnings/option"}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-all duration-200"
+                      >
+                        Options
+                      </Link>
+                      <Link
+                        href={"/learnings/stock"}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-all duration-200"
+                      >
+                        Stocks
+                      </Link>
+                    </ul>
+                  </HoverCardContent>
+                </HoverCard>
 
-              <HoverCard>
-                <HoverCardTrigger>
-                  <div className="relative flex items-center gap-1 cursor-pointer">
-                    <li className="hover:text-green-200 transition flex items-center gap-1">
-                      Learning
-                      <MdOutlineKeyboardArrowDown className="text-lg" />
-                    </li>
-                  </div>
-                </HoverCardTrigger>
-                <HoverCardContent className="absolute top-full  right-0 ml-10 mt-1 bg-white text-gray-800 rounded-sm shadow-md w-32 ">
-                  <ul className="">
-                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                      Options
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                      Stocks
-                    </li>
-                  </ul>
-                </HoverCardContent>
-              </HoverCard>
+                {/* IPO */}
+                <Link
+                  href={"/ipo"}
+                  className="cursor-pointer hover:text-green-200 transition-all duration-300"
+                >
+                  IPO
+                </Link>
 
-              <li className="cursor-pointer hover:text-green-200 transition">
-                IPO
-              </li>
-              <li className="cursor-pointer hover:text-green-200 transition">
-                Insights
-              </li>
-            </ul>
+                {/* Insights */}
+                <Link
+                  href={"/insights"}
+                  className="cursor-pointer hover:text-green-200 transition-all duration-300"
+                >
+                  Insights
+                </Link>
+
+                {/* Search Icon */}
+                <IoIosSearch
+                  className="text-2xl cursor-pointer transition-all duration-300 hover:scale-110"
+                  onClick={() => setclicked(true)}
+                />
+              </ul>
+            )}
+
+            {clicked && (
+              <div className="flex items-center space-x-2 animate-fade-in">
+                {/* Search Input */}
+                <input
+                  type="text"
+                  placeholder="Search"
+                  ref={searchInputRef}
+                  className="rounded-2xl px-4 py-1 w-[500px] focus:outline-none border border-gray-300 focus:border-green-200 transition-all duration-600"
+                />
+
+                {/* Close Icon */}
+                <RxCross1
+                  className="relative right-10 text-xl cursor-pointer hover:text-red-500 transition-all duration-600"
+                  onClick={() => setclicked(false)}
+                />
+              </div>
+            )}
           </div>
         </nav>
       </MediaRendering>
