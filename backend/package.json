@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "npx tsx watch ./src/index.ts",
-    "prod": "npx tsc && node dist/index.js"
+    "prod": "npx tsc ",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
