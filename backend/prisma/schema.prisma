@@ -7,6 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Tags {
+  TRENDING
+  OPTIONS
+  STOCK
+  IPO
+  INSIGHTS
+}
+
 model User {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   email    String    @unique
@@ -21,7 +29,7 @@ model Article {
   slug     String    @unique
   title    String
   sections Section[]
-  tags     String
+  tags     Tags
   date     DateTime  @default(now())
   stock    String[]
   image    String

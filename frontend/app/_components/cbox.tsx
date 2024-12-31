@@ -21,23 +21,23 @@ import { cn } from "@/lib/utils";
 
 const frameworks = [
   {
-    value: "trending",
+    value: "TRENDING",
     label: "Trending News",
   },
   {
-    value: "options",
+    value: "OPTIONS",
     label: "Options",
   },
   {
-    value: "stock",
+    value: "STOCK",
     label: "Stock",
   },
   {
-    value: "ipo",
+    value: "IPO",
     label: "Ipo",
   },
   {
-    value: "insights",
+    value: "INSIGHTS",
     label: "Insights",
   },
 ];

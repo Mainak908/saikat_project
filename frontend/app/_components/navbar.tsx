@@ -125,9 +125,12 @@ const Navbar = () => {
             {!clicked && (
               <ul className="flex items-center space-x-6 text-md font-bold text-white">
                 {/* Trending News */}
-                <li className="cursor-pointer hover:text-green-200 transition-all duration-300">
+                <Link
+                  href={"/trending"}
+                  className="cursor-pointer hover:text-green-200 transition-all duration-300"
+                >
                   Trending News
-                </li>
+                </Link>
 
                 {/* Learning Dropdown */}
                 <HoverCard>

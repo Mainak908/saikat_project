@@ -1,3 +1,4 @@
+import { Tags } from "@prisma/client";
 import axios from "axios";
 import Bcrypt from "bcrypt";
 import { CookieOptions, Request, Response } from "express";
@@ -19,7 +20,7 @@ interface idata {
   title: string;
   sections: { subtitle: string; content: string }[];
   image: string;
-  tags: string;
+  tags: Tags;
   stock: string;
 }
 interface reqdata {
@@ -331,4 +332,24 @@ export async function accessTokenVerify(req: Request, res: Response) {
     console.error("Error verifying token:", error);
     res.status(401).json({ success: false, message: "Invalid token" });
   }
+}
+
+export async function fetchPostByQuery(req: Request, res: Response) {
+  const query = req.query.tags as Tags;
+
+  const data = await prisma.article.findMany({
+    where: {
+      tags: {
+        equals: query,
+      },
+    },
+    select: {
+      image: true,
+      slug: true,
+      title: true,
+      date: true,
+    },
+  });
+
+  res.json(data);
 }

@@ -4,6 +4,7 @@ import {
   createArticle,
   deletepost,
   fetchAllPostsSlug,
+  fetchPostByQuery,
   fetchPostBySlug,
   loginCheckFunc,
   loginFunc,
@@ -13,6 +14,7 @@ import {
   updatepost,
 } from "../controller/admincontroller.js";
 import { adminAuthCheckFn } from "../controller/middlewares.js";
+import { ErrorHandler } from "../errorhandling.js";
 
 const router = Router();
 
@@ -28,5 +30,6 @@ router.route("/deletepost").delete(adminAuthCheckFn, deletepost);
 router.route("/updatepost").post(adminAuthCheckFn, updatepost);
 router.route("/fetchPostBySlug").get(fetchPostBySlug);
 router.route("/accessTokenVerify").post(accessTokenVerify);
+router.route("/trendingSender").get(ErrorHandler(fetchPostByQuery));
 
 export default router;
